@@ -8,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Menu, X } from "lucide-react";
+import { Menu, Search, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -30,18 +30,28 @@ export default function Navbar() {
       justify-between"
       >
         <Link className="font-bold text-xl" href={"/"}>
-          ECommerce
+          Sport Shop
         </Link>
 
+        
         {/* Desktop Navbar */}
         {/* md:flex -> Medium ve üstü ekranlarda flex yapısıyla gözük. */}
         <div className="hidden md:flex space-x-6">
-          <Link href={"/"}>Ana Sayfa</Link>
-          <Link href={"/Hakkimizda"}>Hakkımızda</Link>
-          <Link href={"/"}>Ürünler</Link>
+          <Link href={"/"}>Home</Link>
+          <Link href={"/About-us"}>About us</Link>
+          <Link href={"/"}>Categories</Link>
         </div>
         {/* Desktop Navbar */}
 
+        {/* Search bar*/}
+        <div className="flex border items-center border-gray-300 rounded-lg px-2">
+          <Search className="hover:cursor-text" color="gray"/>
+          <input
+            type="text"
+            placeholder="Search..."
+            className="px-4 py-2 border-none rounded-lg focus:outline-none focus:none w-full"
+          />
+        </div>
         {/* Mobile Navbar Button */}
         <div className="md:hidden">
           <Button
@@ -64,9 +74,9 @@ export default function Navbar() {
           }
         >
           <div className="flex flex-col space-y-4 p-6">
-            <Link href={"/"}>Ana Sayfa</Link>
-            <Link href={"/"}>Hakkımızda</Link>
-            <Link href={"/"}>Ürünler</Link>
+            <Link href={"/"}>Home</Link>
+            <Link href={"/About-us"}>About us</Link>
+            <Link href={"/"}>Categories</Link>
           </div>
         </div>
 
