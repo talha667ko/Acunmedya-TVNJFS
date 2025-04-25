@@ -43,6 +43,7 @@ next-env.d.ts
 # Docker
 docker-compose.override.yml
 *.pid
+docker-compose.yml
 
 # Optional npm cache directory
 .npm
