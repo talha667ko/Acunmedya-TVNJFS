@@ -10,13 +10,19 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Menu, Search, X } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  const searchInputRef = useRef<HTMLInputElement>(null); 
+
 
   const toggleMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const focusInput = () => {
+    searchInputRef.current?.focus(); // ⬅️ Met l’input en focus
   };
 
   return (
@@ -30,7 +36,7 @@ export default function Navbar() {
       justify-between"
       >
         <Link className="font-bold text-xl" href={"/"}>
-          Sport Shop
+          Fight Club Shop
         </Link>
 
         
@@ -44,9 +50,11 @@ export default function Navbar() {
         {/* Desktop Navbar */}
 
         {/* Search bar*/}
-        <div className="flex border items-center border-gray-300 rounded-lg px-2">
-          <Search className="hover:cursor-text" color="gray"/>
+        <div 
+  tabIndex={0} className="flex border items-center border-gray-300 rounded-lg px-2 focus-within:ring-2 focus-within:border-none focus-within:ring-ring">
+          <Search className="hover:cursor-text" color="gray" onClick={focusInput}/>
           <input
+            ref={searchInputRef}
             type="text"
             placeholder="Search..."
             className="px-4 py-2 border-none rounded-lg focus:outline-none focus:none w-full"

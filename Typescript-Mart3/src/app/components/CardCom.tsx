@@ -72,9 +72,9 @@ export default function CardCom(){
 
     return (
         <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl w-full m-auto">
                 {cardData.map((card, index) => (
-                    <Card key={index} className="w-full h-100 max-w-xs overflow-hidden transition-all duration-300 hover:shadow-xl">
+                    <Card key={index} className="w-full h-100 max-w-xs overflow-hidden transition-all duration-300 hover:shadow-2xl">
                         <div className="relative overflow-hidden">
                             <img src={card.img} alt={card.title} className="w-full h-full object-contain"/>
                         </div>
