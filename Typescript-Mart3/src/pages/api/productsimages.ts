@@ -15,20 +15,21 @@ const upload = multer({ storage: multer.memoryStorage() });
 const handler = nc<NextApiRequest, NextApiResponse>({
   onError: (err, req, res, next) => {
     console.error("API Error:", err);
-    res.status(500).json({ error: "Sunucu hatası", details: err.message });
+    res.status(500).json({ error: "Server error", details: err.message });
   },
   onNoMatch: (req, res) => {
-    res.status(405).json({ error: "Method izin verilmiyor" });
+    res.status(405).json({ error: "Method does not allow" });
   },
 });
 
 handler.use(upload.single("file") as any);
+// In postman use form-data and key as file!
 
 handler.post(async (req: any, res) => {
-  console.log("POST isteği alındı", req.file ? "Dosya var" : "Dosya yok", req.body);
+  console.log("POST request taken", req.file ? "File ok" : "File none", req.body);
   
   if (!req.file) {
-    return res.status(400).json({ error: "Dosya yüklenmedi" });
+    return res.status(400).json({ error: "File uploaded" });
   }
 
   try {
@@ -43,10 +44,10 @@ handler.post(async (req: any, res) => {
       streamifier.createReadStream(req.file.buffer).pipe(uploadStream);
     });
 
-    return res.status(200).json({ message: "Yüklendi", result });
+    return res.status(200).json({ message: "Uploaded", result });
   } catch (error) {
-    console.error("Yükleme hatası:", error);
-    return res.status(500).json({ error: "Yükleme başarısız oldu" });
+    console.error("Upload error:", error);
+    return res.status(500).json({ error: "Upload failed:" });
   }
 });
 
