@@ -42,7 +42,23 @@ export default function Navbar() {
         <div className="hidden md:flex space-x-6">
           <Link href={"/"}>Home</Link>
           <Link href={"/About-us"}>About us</Link>
-          <Link href={"/"}>Categories</Link>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <p>Categories</p>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem className="cursor-pointer">
+                Hommes
+              </DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer">
+                Femmes
+              </DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer">
+                Enfants
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
         </div>
         {/* Desktop Navbar */}
 
