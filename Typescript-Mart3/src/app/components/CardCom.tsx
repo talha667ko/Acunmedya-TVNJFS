@@ -1,89 +1,52 @@
+"use client";
 import { Card } from "@/components/ui/card";
-import fairt from "../../../public/Fairtex.jpg"
+import { useEffect, useState } from "react";
+
 
 export default function CardCom(){
 
-    const cardData = [
-        {
-            title: "Gants de boxe",
-            brand: "Élion Paris",
-            color: "Turquoise",
-            description: "Gants de boxe en cuir de vachette, fabriqués en Thaïlande.",
-            img: "/ELEGANT.jpg",
-            price: 200
-        },
-        {
-            title: "Gants de MMA",
-            brand: "Venum",
-            color: "Noir/doré",
-            description: "Gants de MMA en cuir de buffle, fabriqués en Thaïlande.",
-            img: "/gantsMMA.jpg",
-            price: 25
-        },
-        {
-            title: "Protèges tibia",
-            brand: "Fairtex",
-            color: "Noir",
-            description: "Protèges tibia en cuir de buffle, fabriqués en Thaïlande.",
-            img: "/Fairtex.jpg",
-            price: 100
-        },
-        {
-            title: "Sac de sport",
-            brand: "Reebok",
-            color: "Camouflage",
-            description: "Sac de sport en polyester, fabriqué en Chine.",
-            img: "/sac.jpg",
-            price: 30
-        },
-        {
-            title: "Sac de sport",
-            brand: "Reebok",
-            color: "Camouflage",
-            description: "Sac de sport en polyester, fabriqué en Chine.",
-            img: "/sac.jpg",
-            price: 30
-        },
-        {
-            title: "Sac de sport",
-            brand: "Reebok",
-            color: "Camouflage",
-            description: "Sac de sport en polyester, fabriqué en Chine.",
-            img: "/sac.jpg",
-            price: 30
-        },
-        {
-            title: "Sac de sport",
-            brand: "Reebok",
-            color: "Camouflage",
-            description: "Sac de sport en polyester, fabriqué en Chine.",
-            img: "/sac.jpg",
-            price: 30
-        },
-        {
-            title: "Sac de sport",
-            brand: "Reebok",
-            color: "Camouflage",
-            description: "Sac de sport en polyester, fabriqué en Chine.",
-            img: "/sac.jpg",
-            price: 30
-        }
-    ]
+    interface CardData {
+        name: string;
+        brand: string;
+        color: string;
+        description: string;
+        price: number;
+        imageURL: string;
+    }
+
+    const [cardData, setCardData] = useState<CardData[]>([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await fetch("/api/products"); // Remplacez par le bon chemin de votre API
+            if (!response.ok) {
+              throw new Error("Erreur lors de la récupération des données");
+            }
+            const data = await response.json();
+            setCardData(data); // Stockez les données dans l'état
+          } catch (error) {
+            console.error("Erreur :", error);
+          }
+        };
+        console.log("fetchData");
+        fetchData();
+      }, []);
 
     return (
         <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl w-full m-auto">
                 {cardData.map((card, index) => (
                     <Card key={index} className="w-full h-100 max-w-xs overflow-hidden transition-all duration-300 hover:shadow-2xl">
-                        <div className="relative overflow-hidden">
-                            <img src={card.img} alt={card.title} className="w-full h-full object-contain"/>
+                        <div className="relative overflow-hidden h-1/2">
+                            <img src={card.imageURL} alt={card.name} className="w-full h-full object-contain"/>
                         </div>
-                        <div className="p-4">
-                            <h2 className="text-3xl font-bold">{card.title}</h2>
-                            <p className="text-sm text-gray-500">{card.brand}</p>
-                            <p className="text-sm text-gray-500">{card.color}</p>
-                            <p className="text-sm text-gray-500">{card.description}</p>
+                        <div className="p-4 h-1/2">
+                            <h2 className="text-2xl font-bold">{card.name}</h2>
                             <p className="text-xl text-black font-bold">{card.price} €</p>
+                            <p className="text-sm text-cyan-700">{card.brand}</p>
+                            <p className="text-sm text-cyan-700">{card.color}</p>
+                            <p className="text-sm text-gray-500">{card.description}</p>
                         </div>
                     </Card>
                 ))}
