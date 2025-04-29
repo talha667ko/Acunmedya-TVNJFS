@@ -39,7 +39,7 @@ export default function Navbar() {
         
         {/* Desktop Navbar */}
         {/* md:flex -> Medium ve üstü ekranlarda flex yapısıyla gözük. */}
-        <div className="hidden md:flex space-x-6">
+        <div className="hidden md:flex space-x-6 cursor-pointer">
           <Link href={"/"}>Home</Link>
           <Link href={"/About-us"}>About us</Link>
           <DropdownMenu>
@@ -47,7 +47,7 @@ export default function Navbar() {
               <p>Categories</p>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuItem className="cursor-pointer">
+              <DropdownMenuItem className="cursor-pointer" >
                 Hommes
               </DropdownMenuItem>
               <DropdownMenuItem className="cursor-pointer">
@@ -75,7 +75,6 @@ export default function Navbar() {
             {isMobileMenuOpen ? <X /> : <Menu />}
           </Button>
         </div>
-        {/* Mobile Navbar Button*/}
         {/* Mobile Navbar */}
 
         {/* md:hidden -> Medium ve üstü ekranlarda hidden yani görünmez olması */}
