@@ -8,22 +8,19 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Menu, Search, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useState } from "react";
+import SearchBar from "../SearchBar";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
-  const searchInputRef = useRef<HTMLInputElement>(null); 
 
 
   const toggleMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const focusInput = () => {
-    searchInputRef.current?.focus(); // ⬅️ Met l’input en focus
-  };
 
   return (
     <nav className="border-b bg-background sticky top-0 z-50">
@@ -50,16 +47,7 @@ export default function Navbar() {
         {/* Desktop Navbar */}
 
         {/* Search bar*/}
-        <div 
-  tabIndex={0} className="flex border items-center border-gray-300 rounded-lg px-2 focus-within:ring-2 focus-within:border-none focus-within:ring-ring">
-          <Search className="hover:cursor-text" color="gray" onClick={focusInput}/>
-          <input
-            ref={searchInputRef}
-            type="text"
-            placeholder="Search..."
-            className="px-4 py-2 border-none rounded-lg focus:outline-none focus:none w-full"
-          />
-        </div>
+        <SearchBar />
         {/* Mobile Navbar Button */}
         <div className="md:hidden">
           <Button
