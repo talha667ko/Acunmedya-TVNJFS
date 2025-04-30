@@ -64,6 +64,11 @@ export default function Navbar() {
 
         {/* Search bar*/}
         <SearchBar />
+        <div className="flex">
+          <Link href={"/Account"}>
+            <Button className="cursor-pointer">Account</Button>
+          </Link>
+          </div>
         {/* Mobile Navbar Button */}
         <div className="md:hidden">
           <Button
@@ -110,6 +115,7 @@ export default function Navbar() {
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
+        
       </div>
     </nav>
   );
