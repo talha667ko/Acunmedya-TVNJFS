@@ -65,7 +65,7 @@ export default function Navbar() {
         {/* Search bar*/}
         <SearchBar />
         <div className="flex">
-          <Link href={"/Account"}>
+          <Link href={"/Auth"}>
             <Button className="cursor-pointer">Account</Button>
           </Link>
           </div>

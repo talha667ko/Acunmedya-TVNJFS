@@ -44,18 +44,18 @@ export default function CardCom(){
 
     return (
         <>
-            <div className="grid grid-cols-2 md:grid-cols-4 md:p-0 px-4  gap-4 max-w-4xl w-full m-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 md:p-0 px-3  gap-4 max-w-4xl w-full m-auto">
                 {cardData.map((card, index) => (
                     <Card key={index} className="w-full h-100 max-w-xs overflow-hidden transition-all duration-300 hover:shadow-2xl">
                         <div className="relative overflow-hidden h-1/2">
                             <img src={card.imageURL} alt={card.name} className="w-full h-full object-contain"/>
                         </div>
                         <div className="p-4 h-1/2">
-                            <h2 className="text-2xl font-bold">{card.name}</h2>
+                            <h2 className="text-xl font-bold">{card.name}</h2>
                             <p className="text-xl text-black font-bold">{card.price} €</p>
                             <p className="text-sm text-cyan-700">{card.brand}</p>
                             <p className="text-sm text-cyan-700">{card.color}</p>
-                            <p className="text-sm text-gray-500">{card.description}</p>
+                            <p className="text-sm text-gray-500 overflow-hidden">{card.description}</p>
                         </div>
                     </Card>
                 ))}

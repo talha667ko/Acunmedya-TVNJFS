@@ -12,7 +12,7 @@ export default async function Home() {
       <CardCom/>
       <h1 className="text-3xl font-semibold text-cyan-600 mt-12 mb-3">Trending Items</h1>
       <CardCom/>
-      <h1 className="text-2xl font-semibold text-cyan-600 mt-12 mb-3">Last Seen</h1>
+      <h1 className="text-3xl font-semibold text-cyan-600 mt-12 mb-3">Last Seen</h1>
       <CardCom/>
     </div>
     </StrictMode>
