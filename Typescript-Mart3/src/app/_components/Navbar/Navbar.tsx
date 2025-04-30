@@ -12,7 +12,6 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import SearchBar from "../SearchBar";
-
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
@@ -65,7 +64,7 @@ export default function Navbar() {
         {/* Search bar*/}
         <SearchBar />
         <div className="flex">
-          <Link href={"/Auth"}>
+          <Link href={"/Account"}>
             <Button className="cursor-pointer">Account</Button>
           </Link>
           </div>
@@ -104,13 +103,13 @@ export default function Navbar() {
               <Button className="cursor-pointer">Dil</Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuLabel>Dil Seçiniz</DropdownMenuLabel>
+              <DropdownMenuLabel>Choisissez une langue</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="cursor-pointer">
-                Türkçe
+                Français 🇫🇷
               </DropdownMenuItem>
               <DropdownMenuItem className="cursor-pointer">
-                İngilizce
+                English 🇬🇧
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

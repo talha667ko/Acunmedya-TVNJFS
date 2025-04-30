@@ -1,5 +1,5 @@
 import Link from "next/link";
-import CardCom from "./components/CardCom";
+import CardCom from "./_components/CardCom";
 import React, { StrictMode } from "react";
 
 export default async function Home() {

@@ -8,7 +8,7 @@ export default function Login() {
                 <input type="text" placeholder="Nom d'utilisateur" className="border-2 rounded-md p-2 mb-4"/>
                 <input type="password" placeholder="Mot de passe" className="border-2 rounded-md p-2 mb-4"/>
                 <button className="bg-blue-500 text-white rounded-md p-2 mb-4">Se Connecter</button>
-                <p className="text-center">Vous n'avez pas de compte ? <Link href={"/Account/Register"} className="text-blue-500">Créer un compte</Link></p>
+                <p className="text-center">Vous n'avez pas de compte ? <Link href={"/Auth/Register"} className="text-blue-500">Créer un compte</Link></p>
             </div>
         
     );

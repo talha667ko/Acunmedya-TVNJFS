@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default function Register() {
@@ -8,8 +9,8 @@ export default function Register() {
             <input type="text" placeholder="Nom d'utilisateur" className="border-2 rounded-md p-2 mb-4" />
             <input type="email" placeholder="Email" className="border-2 rounded-md p-2 mb-4" />
             <input type="password" placeholder="Mot de passe" className="border-2 rounded-md p-2 mb-4" />
-            <button className="bg-blue-500 text-white rounded-md p-2 mb-4">S'inscrire</button>
-            <p className="text-center">Vous avez déjà un compte ? <Link href={"/Account/Log-in"} className="text-blue-500">Se connecter</Link></p>
+            <Button className="">S'inscrire</Button>
+            <p className="text-center">Vous avez déjà un compte ? <Link href={"/Auth/Log-in"} className="text-blue-500">Se connecter</Link></p>
             <p className="text-center">En vous inscrivant, vous acceptez nos <Link href={"/Account/Terms"} className="text-blue-500">Conditions d'utilisation</Link> et notre <Link href={"/Account/Privacy"} className="text-blue-500">Politique de confidentialité</Link>.</p>
         </div>
     );
