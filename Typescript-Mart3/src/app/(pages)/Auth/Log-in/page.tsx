@@ -30,15 +30,15 @@ export default function Login() {
     }
     return (
         <Card className="flex flex-col justify-center items-center max-w-4xl w-full m-auto border-4 mt-32">
-            <CardHeader className="max-w-xl w-full m-auto">
+            <CardHeader className="max-w-xl w-full m-auto mb-6">
                 <CardTitle className="text-4xl font-bold">Connexion</CardTitle>
                 <CardDescription className="">Bienvenue sur notre site !</CardDescription>
             </CardHeader>
-            <CardContent className="">
+            <CardContent>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
-                    <div className="flex flex-col gap-y-3 mb-6 w-full m-auto justify-center items-center">
-                    <div className="w-full">
+                    <div className="grid grid-rows-2 grid-cols-2 gap-1 gap-y-3 mb-6 w-full justify-center items-center">
+                    <div className="col-span-2">
                             <FormField
                                 control={form.control}
                                 name="email"
@@ -55,7 +55,7 @@ export default function Login() {
                                 )}
                             />
                         </div>
-                        <div className="w-full">
+                        <div className="col-span-2">
                             <FormField
                                 control={form.control}
                                 name="password"
@@ -72,14 +72,14 @@ export default function Login() {
                                 )}
                             />
                         </div>
+                        <Button className="col-span-1">Se Connecter</Button>
                 </div>
-                <Button className="w-full">Se Connecter</Button>
                 </form>
                 </Form>
             </CardContent>
             <CardFooter>
             <p className="text-center">Vous n'avez pas de compte ? 
-                <Link href={"/Auth/Register"} className="text-blue-500">Créer un compte</Link>
+                <Link href={"/Auth/Register"} className="text-blue-500 hover:underline">Créer un compte</Link>
             </p>
             </CardFooter>
         </Card>

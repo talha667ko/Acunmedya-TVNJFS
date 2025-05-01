@@ -15,12 +15,16 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form"
+import { Check } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const formSchema = z.object({
     firstName: z.string().min(2, { message: "Le prénom est requis" }).max(20, { message: "Le prénom ne doit pas dépasser 20 caractères" }),
     lastName: z.string().min(2, { message: "Le nom est requis" }).max(20, { message: "Le nom ne doit pas dépasser 20 caractères" }),
     email: z.string().email({ message: "Email invalide" }),
     password: z.string().min(8, { message: "Le mot de passe doit contenir au moins 8 caractères" }).max(20, { message: "Le mot de passe ne doit pas dépasser 20 caractères" }),
+    confirmPassword: z.string().min(8, { message: "Le mot de passe doit contenir au moins 8 caractères" }).max(20, { message: "Le mot de passe ne doit pas dépasser 20 caractères" }),
+    terms: z.literal(true),
 });
 
 export default function Register() {
@@ -32,6 +36,8 @@ export default function Register() {
             lastName: "",
             email: "",
             password: "",
+            confirmPassword: "",
+            terms: false as any,
         },
     })
 
@@ -50,7 +56,7 @@ export default function Register() {
             <CardContent>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
-                    <div className="grid grid-cols-2 gap-1 mb-6 w-full m-auto justify-center items-center">
+                    <div className="grid grid-cols-2 gap-3 mb-6 w-full m-auto justify-center items-center">
                         <div className="col-span-1">
                             <FormField
                                 control={form.control}
@@ -108,9 +114,9 @@ export default function Register() {
                                 name="password"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Password</FormLabel>
+                                        <FormLabel>Mot de passe</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="Password" {...field} />
+                                            <Input placeholder="Mot de passe" {...field} />
                                         </FormControl>
                                         <FormDescription>
                                         </FormDescription>
@@ -119,8 +125,42 @@ export default function Register() {
                                 )}
                             />
                         </div>
+                        <div className="col-span-2">
+                            <FormField
+                                control={form.control}
+                                name="confirmPassword"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Confirmez mot de passe</FormLabel>
+                                        <FormControl>
+                                            <Input placeholder="Confirmez le mot de passe" {...field} />
+                                        </FormControl>
+                                        <FormDescription>
+                                        </FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </div>
+                        <div className="col-span-2 flex flex-col">
+                            <FormField
+                            control={form.control}
+                            name="terms"
+                            render={({ field }) => (
+                                <FormItem className="flex items-center space-x-2">
+                                    <FormControl>
+                                        <Checkbox
+                                            checked={field.value}
+                                            onCheckedChange={field.onChange}
+                                        />
+                                    </FormControl>
+                                    <FormLabel className="text-sm">J'accepte les termes et conditions</FormLabel>
+                                </FormItem>
+                            )}
+                            />
                     </div>
-                    <Button className="w-full">S'inscrire</Button>
+                    </div>
+                    <Button type="submit" className="w-full">S'inscrire</Button>
                 </form>
             </Form>
             </CardContent>
