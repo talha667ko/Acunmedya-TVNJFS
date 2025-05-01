@@ -29,7 +29,7 @@ export default function Login() {
         console.log(values)
     }
     return (
-        <Card className="flex flex-col justify-center items-center max-w-4xl w-full m-auto border-4 mt-32">
+        <Card className="flex flex-col justify-center items-center max-w-4xl w-full m-auto border-4 mt-16">
             <CardHeader className="max-w-xl w-full m-auto mb-6">
                 <CardTitle className="text-4xl font-bold">Connexion</CardTitle>
                 <CardDescription className="">Bienvenue sur notre site !</CardDescription>
@@ -72,7 +72,7 @@ export default function Login() {
                                 )}
                             />
                         </div>
-                        <Button className="col-span-1">Se Connecter</Button>
+                        <Button type="submit" className="col-span-1">Se Connecter</Button>
                 </div>
                 </form>
                 </Form>

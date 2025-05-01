@@ -30,7 +30,7 @@ export default function Account() {
                     <Card className="col-span-3 p-6 justify-center items-center text-center text-lg font-medium hover:shadow-xl transition-all duration-300"><Settings size={40}/>Réglages comptes</Card>
 
                 </div>
-                <Button className="mt-6">Déconnexion</Button>
+                <Button className="mt-6 w-2/3 bg-red-700 hover:bg-red-400">Déconnexion</Button>
             </Card>
         </>
     );

@@ -48,7 +48,7 @@ export default function Register() {
         console.log(values)
     }
     return (
-        <Card className="flex flex-col justify-center items-center max-w-4xl w-full m-auto border-4 mt-32">
+        <Card className="flex flex-col justify-center items-center max-w-4xl w-full m-auto border-4 mt-12">
             <CardHeader className="max-w-xl w-full m-auto mb-6">
             <CardTitle className="text-4xl font-bold">Créer un Compte</CardTitle>
             <CardDescription className="">Inscrivez-vous pour profiter de nos services.</CardDescription>
