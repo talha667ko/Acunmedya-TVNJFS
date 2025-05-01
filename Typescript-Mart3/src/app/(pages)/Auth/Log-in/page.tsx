@@ -1,5 +1,5 @@
 "use client";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import {Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
@@ -29,15 +29,15 @@ export default function Login() {
         console.log(values)
     }
     return (
-        <Card className="flex flex-col justify-center items-center max-w-4xl w-full m-auto border-4 mt-32 gap-1">
-            <CardHeader className="w-full m-auto">
+        <Card className="flex flex-col justify-center items-center max-w-4xl w-full m-auto border-4 mt-32">
+            <CardHeader className="max-w-xl w-full m-auto">
                 <CardTitle className="text-4xl font-bold">Connexion</CardTitle>
-                <CardDescription className="text-lg">Bienvenue sur notre site !</CardDescription>
+                <CardDescription className="">Bienvenue sur notre site !</CardDescription>
             </CardHeader>
-            <CardContent>
-            <div className="flex flex-col gap-1 mb-6 w-full m-auto justify-center items-center">
+            <CardContent className="">
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
+                    <div className="flex flex-col gap-y-3 mb-6 w-full m-auto justify-center items-center">
                     <div className="w-full">
                             <FormField
                                 control={form.control}
@@ -55,7 +55,7 @@ export default function Login() {
                                 )}
                             />
                         </div>
-                        <div className="">
+                        <div className="w-full">
                             <FormField
                                 control={form.control}
                                 name="password"
@@ -72,13 +72,16 @@ export default function Login() {
                                 )}
                             />
                         </div>
+                </div>
                 <Button className="w-full">Se Connecter</Button>
                 </form>
                 </Form>
-                </div>
-                <p className="text-center">Vous n'avez pas de compte ? <Link href={"/Auth/Register"} className="text-blue-500">Créer un compte</Link></p>
-
             </CardContent>
+            <CardFooter>
+            <p className="text-center">Vous n'avez pas de compte ? 
+                <Link href={"/Auth/Register"} className="text-blue-500">Créer un compte</Link>
+            </p>
+            </CardFooter>
         </Card>
     );
 }
