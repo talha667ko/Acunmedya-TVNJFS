@@ -1,7 +1,8 @@
 import mongoose, { HydratedDocument, Model, Schema } from "mongoose";
 import bcrypt from "bcrypt";
 export interface IUser extends Document {
-    name: string;
+    firstName: string;
+    lastName: string;
     email: string;
     password: string;
     comparePassword(password:string):Promise<boolean>
@@ -9,7 +10,8 @@ export interface IUser extends Document {
 
 const UserSchema = new Schema<IUser>(
     {
-        name: {type: String, required: true, minlength: 2},
+        firstName: {type: String, required: true, minlength: 2},
+        lastName: {type: String, required: true, minlength: 2},
         email: {type: String, required: true, unique: true},
         password: {type: String, required: true, minlength: 8},
     },
