@@ -12,6 +12,7 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import SearchBar from "../SearchBar";
+
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
@@ -20,7 +21,7 @@ export default function Navbar() {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-
+  const isLoggedIn = true; // Replace with your authentication logic
   return (
     <nav className="border-b bg-background sticky top-0 z-50">
       <div
@@ -64,9 +65,15 @@ export default function Navbar() {
         {/* Search bar*/}
         <SearchBar />
         <div className="flex">
-          <Link href={"/Account"}>
-            <Button className="cursor-pointer">Account</Button>
-          </Link>
+          {isLoggedIn ? (
+            <Link href={"/Account"}>
+              <Button className="cursor-pointer">Account</Button>
+            </Link>
+          ) : (
+            <Link href={"/Auth/Log-in"}>
+              <Button className="cursor-pointer">Log in</Button>
+            </Link>
+          )}
           </div>
         {/* Mobile Navbar Button */}
         <div className="md:hidden">
