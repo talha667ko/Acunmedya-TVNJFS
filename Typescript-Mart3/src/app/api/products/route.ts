@@ -1,4 +1,3 @@
-// HTTP Request Anatomy araştırılacak.
 
 import { Product } from "../../../lib/db/models/Product";
 import { connectToDatabase } from "@/lib/db/mongodb";
@@ -22,6 +21,3 @@ export async function POST(req: Request) {
     headers: { "Content-Type": "application/json" },
   });
 }
-
-// 1- RDBMS - NOSQL (PostgreSQL - MongoDB)
-// Prisma - Mongoose
