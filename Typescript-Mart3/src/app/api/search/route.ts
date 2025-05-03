@@ -4,7 +4,6 @@ import { connectToDatabase } from "@/lib/db/mongodb";
 export async function GET(req: Request) {
     await connectToDatabase();
 
-    // Récupère la query des paramètres de l'URL
     const url = new URL(req.url);
     const searchQuery = url.searchParams.get("query") || "";
 
@@ -15,9 +14,8 @@ export async function GET(req: Request) {
         });
     }
 
-    // Rechercher des produits dont le nom correspond à la query
     const products = await Product.find({
-        name: { $regex: searchQuery, $options: "i" } // Recherche insensible à la casse
+        name: { $regex: searchQuery, $options: "i" }
     }).exec();
 
     return new Response(JSON.stringify(products), {

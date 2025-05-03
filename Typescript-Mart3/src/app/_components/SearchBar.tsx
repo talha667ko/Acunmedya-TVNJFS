@@ -8,10 +8,18 @@ export default function SearchBar() {
     const [searchResults, setSearchResults] = useState([]);
     const searchInputRef = useRef<HTMLInputElement>(null);
     const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const [isFocused, setIsFocused] = useState(false); // État pour gérer le focus
 
     const focusInput = () => {
         searchInputRef.current?.focus();
     };
+
+    const handleFocus = () => {
+        setIsFocused(true);
+    }
+    const handleUnFocus = () => {
+        setIsFocused(false);
+    }
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchQuery(e.target.value);
@@ -54,19 +62,22 @@ export default function SearchBar() {
                 className="px-4 py-2 border-none rounded-lg focus:outline-none focus:none w-full"
                 value={searchQuery}
                 onChange={handleSearchChange}
+                onFocus={handleFocus}
+                onBlur={handleUnFocus}
             />
         </div>
-        <div className="absolute mt-10 z-50 flex items-center border-gray-300 rounded-lg px-2">
-            {searchResults.length > 0 && (
-              <div className="mt-2">
+        
+            {isFocused && searchQuery.trim() !== "" && searchResults.length > 0 && (
+                <div className="absolute mt-12 w-full z-50 flex items-center border-2 border-black bg-gray-100 rounded-lg scroll-auto">
+              <div className="w-full rounded-lg">
               {searchResults.map((result: any) => (
-                  <div key={result._id} className="p-2 border bg-white hover:bg-gray-100">
-                      {result.name} {/* Affiche les résultats de recherche */}
+                  <div key={result._id} className="p-2 rounded-lg hover:bg-white ">
+                      {result.name}
                   </div>
               ))}
+              </div>
           </div>
               )}
-        </div>
       </div>
     );
 }
