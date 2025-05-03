@@ -48,7 +48,7 @@ export default function CardCom(){
         <>
             <div className="grid grid-cols-2 md:grid-cols-4 md:p-0 px-3  gap-4 max-w-4xl w-full m-auto">
                 {cardData.map((card, index) => (
-                  <Link key={index} href={`Détails/${card._id}`}>
+                  <Link key={index} href={`/Produit/${card._id}`}>
                     <Card key={index} className="w-full h-100 max-w-xs overflow-hidden transition-all duration-300 hover:shadow-2xl">
                         <div className="relative overflow-hidden h-1/2">
                             <img src={card.imageURL} alt={card.name} className="w-full h-full object-contain"/>
