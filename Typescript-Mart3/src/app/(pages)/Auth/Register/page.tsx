@@ -53,7 +53,7 @@ export default function Register() {
             },
         }).then((res) => {
             if (res.status === 201) {
-                nextRouter("/Auth/Log-in");
+                
             } else {
                 console.log("Error: ", res);
             }
