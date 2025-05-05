@@ -72,7 +72,7 @@ export default function Login() {
                                 )}
                             />
                         </div>
-                        <Button type="submit" className="col-span-1">Se Connecter</Button>
+                        <Button type="button" className="col-span-1">Se Connecter</Button>
                 </div>
                 </form>
                 </Form>
