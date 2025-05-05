@@ -1,6 +1,8 @@
 import { User } from "@/lib/db/models/User";
 import { connectToDatabase } from "@/lib/db/mongodb";
 import {jwtVerify, SignJWT} from "jose";
+import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
 
 const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret";
 
@@ -26,6 +28,20 @@ export async function POST(req:Request)
          .setExpirationTime('2h')
          .sign(new TextEncoder().encode(JWT_SECRET));
 
+      const cookie = await cookies();
 
-    return new Response(JSON.stringify({message: "Login successful"}), {status: 200, headers: {"Content-Type": "application/json"}});
+      cookie.set(
+      {
+         name: "token",
+         value: token,
+         httpOnly:true,
+         maxAge:  7 * 24 * 60 * 60,
+         path: '/',
+         secure: process.env.NODE_ENV === 'production',
+         sameSite: 'lax' // strict,lax,none => 
+      }
+      );
+
+
+    return NextResponse.json({message: "Login successful", token}, {status: 200});
 }

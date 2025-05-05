@@ -27,6 +27,10 @@ export default function Login() {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
         console.log(values)
+        fetch("/api/auth/login", {
+            method: "POST",
+            body: JSON.stringify(values),
+        });
     }
     return (
         <Card className="flex flex-col justify-center items-center max-w-4xl w-full m-auto border-4 mt-16">
@@ -72,7 +76,7 @@ export default function Login() {
                                 )}
                             />
                         </div>
-                        <Button type="button" className="col-span-1">Se Connecter</Button>
+                        <Button type="submit" className="col-span-1">Se Connecter</Button>
                 </div>
                 </form>
                 </Form>

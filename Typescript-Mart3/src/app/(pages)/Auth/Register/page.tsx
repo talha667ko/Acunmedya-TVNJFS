@@ -15,7 +15,6 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form"
-import { Check } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 
 const formSchema = z.object({
@@ -46,6 +45,19 @@ export default function Register() {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
         console.log(values)
+        fetch("api/auth/register", {
+            method: "POST",
+            body: JSON.stringify(values),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then((res) => {
+            if (res.status === 201) {
+                nextRouter("/Auth/Log-in");
+            } else {
+                console.log("Error: ", res);
+            }
+        } )
     }
     return (
         <Card className="flex flex-col justify-center items-center max-w-4xl w-full m-auto border-4 mt-12">
