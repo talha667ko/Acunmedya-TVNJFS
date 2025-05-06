@@ -14,10 +14,8 @@ export async function POST(req:NextRequest)
 
     const user = await User.create({firstName,lastName,email,password});
 
-    return NextResponse.redirect(new URL("/Auth/Log-in", req.url), {
-        status: 302,
-        headers: {
-            "Content-Type": "application/json",
-        }
-    });
+    return NextResponse.json(
+        { message: "Registered to successfully", redirectTo: "/Auth/Log-in" },
+        { status: 200 }
+      );
 }

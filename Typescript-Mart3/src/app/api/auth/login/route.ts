@@ -43,6 +43,9 @@ export async function POST(req:Request)
       );
 
 
-      return NextResponse.redirect(new URL("/", req.url), { status: 302 });
+      return NextResponse.json(
+         { message: "Login successful", redirectTo: "/" },
+         { status: 200 }
+       );
 
 }

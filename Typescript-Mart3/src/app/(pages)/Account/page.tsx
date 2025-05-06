@@ -13,6 +13,19 @@ export default function Account() {
     // In a real application, you would check the user's authentication status here
     // For example, you might check a cookie or a session variable
     // const isLoggedIn = checkUserAuthentication();
+
+    async function logOut() {
+        try {
+            
+        } catch (error) {
+            const res = await fetch("/api/auth/logout", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json", // Assurez-vous que le type de contenu est correct
+                },
+            });
+        }
+    }
     
     return (
         <>
@@ -30,7 +43,7 @@ export default function Account() {
                     <Card className="col-span-3 p-6 justify-center items-center text-center text-lg font-medium hover:shadow-xl transition-all duration-300"><Settings size={40}/>Réglages comptes</Card>
 
                 </div>
-                <Button className="mt-6 w-2/3 bg-red-700 hover:bg-red-400">Déconnexion</Button>
+                <Button onClick={logOut} className="mt-6 w-2/3 bg-red-700 hover:bg-red-400">Déconnexion</Button>
             </Card>
         </>
     );

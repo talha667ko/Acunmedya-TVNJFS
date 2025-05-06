@@ -7,12 +7,14 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
     email: z.string().email({ message: "Email invalide" }),
     password: z.string().min(8, { message: "Le mot de passe doit contenir au moins 8 caractères" }).max(20, { message: "Le mot de passe ne doit pas dépasser 20 caractères" }),
 });
 export default function Login() {
+    const router = useRouter();
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -29,12 +31,26 @@ export default function Login() {
         console.log(values)
         try {
             const res = await fetch("/api/auth/login", {
-            method: "POST",
-            body: JSON.stringify(values),
-        });
-        } catch (error) {
-            console.log(error);
-        }
+              method: "POST",
+              body: JSON.stringify(values),
+              headers: {
+                "Content-Type": "application/json", // Assurez-vous que le type de contenu est correct
+              },
+            });
+      
+            const data = await res.json();
+      
+            if (res.ok) {
+              // Si la connexion est réussie, on redirige l'utilisateur
+              router.push(data.redirectTo); // Redirige vers la page d'accueil ou une autre page
+            } else {
+              // Gérer les erreurs de connexion
+              alert(data.message || "Une erreur est survenue.");
+            }
+          } catch (error) {
+            console.error("Erreur de connexion :", error);
+            alert("Échec de la connexion. Veuillez réessayer.");
+          }
     }
     return (
         <Card className="flex flex-col justify-center items-center max-w-4xl w-full m-auto border-4 mt-16">
