@@ -8,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import SearchBar from "../SearchBar";
@@ -67,7 +67,7 @@ export default function Navbar() {
         <div className="flex">
           {isLoggedIn ? (
             <Link href={"/Account"}>
-              <Button className="cursor-pointer">Account</Button>
+              <Button className="cursor-pointer"><User/></Button>
             </Link>
           ) : (
             <Link href={"/Auth/Log-in"}>

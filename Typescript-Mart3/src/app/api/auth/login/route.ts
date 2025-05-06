@@ -1,6 +1,6 @@
 import { User } from "@/lib/db/models/User";
 import { connectToDatabase } from "@/lib/db/mongodb";
-import {jwtVerify, SignJWT} from "jose";
+import { SignJWT} from "jose";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
@@ -43,5 +43,6 @@ export async function POST(req:Request)
       );
 
 
-    return NextResponse.json({message: "Login successful", token}, {status: 200});
+      return NextResponse.redirect(new URL("/", req.url), { status: 302 });
+
 }
