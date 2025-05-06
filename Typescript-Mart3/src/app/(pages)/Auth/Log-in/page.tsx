@@ -23,14 +23,18 @@ export default function Login() {
     })
 
     // 2. Define a submit handler.
-    function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: z.infer<typeof formSchema>) {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
         console.log(values)
-        fetch("/api/auth/login", {
+        try {
+            const res = await fetch("/api/auth/login", {
             method: "POST",
             body: JSON.stringify(values),
         });
+        } catch (error) {
+            console.log(error);
+        }
     }
     return (
         <Card className="flex flex-col justify-center items-center max-w-4xl w-full m-auto border-4 mt-16">
