@@ -16,7 +16,10 @@ export default function Page({ params }: { params: { _id: string } }) {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const res = await fetch(`/api/products/details/${params._id}`);
+                const res = await fetch(`/api/products/details?id=${params._id}`);
+                if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${res.status}`);
+                }
                 const data = await res.json();
                 setProduct(data);
             } catch (error) {

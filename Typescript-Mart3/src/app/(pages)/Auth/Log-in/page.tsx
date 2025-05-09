@@ -15,7 +15,6 @@ const formSchema = z.object({
 });
 export default function Login() {
     const router = useRouter();
-    // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -24,27 +23,21 @@ export default function Login() {
         },
     })
 
-    // 2. Define a submit handler.
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log(values)
         try {
             const res = await fetch("/api/auth/login", {
               method: "POST",
               body: JSON.stringify(values),
               headers: {
-                "Content-Type": "application/json", // Assurez-vous que le type de contenu est correct
+                "Content-Type": "application/json",
               },
             });
       
             const data = await res.json();
       
             if (res.ok) {
-              // Si la connexion est réussie, on redirige l'utilisateur
-              router.push(data.redirectTo); // Redirige vers la page d'accueil ou une autre page
+              router.push(data.redirectTo);
             } else {
-              // Gérer les erreurs de connexion
               alert(data.message || "Une erreur est survenue.");
             }
           } catch (error) {

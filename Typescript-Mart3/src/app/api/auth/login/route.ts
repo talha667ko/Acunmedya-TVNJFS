@@ -38,7 +38,7 @@ export async function POST(req:Request)
          maxAge:  7 * 24 * 60 * 60,
          path: '/',
          secure: process.env.NODE_ENV === 'production',
-         sameSite: 'lax' // strict,lax,none => 
+         sameSite: 'lax'
       }
       );
 

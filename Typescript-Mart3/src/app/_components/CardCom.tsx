@@ -54,6 +54,7 @@ export default function CardCom(){
                             <img src={card.imageURL} alt={card.name} className="w-full h-full object-contain"/>
                         </div>
                         <div className="p-4 h-1/2">
+                            <p className="text-sm text-gray-500">{card._id}</p>
                             <h2 className="text-xl font-bold">{card.name}</h2>
                             <p className="text-xl text-black font-bold">{card.price} €</p>
                             <p className="text-sm text-cyan-700">{card.brand}</p>

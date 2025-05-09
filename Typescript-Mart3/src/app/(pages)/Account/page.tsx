@@ -3,27 +3,32 @@ import { Button } from "@/components/ui/button";
 import { Card, CardTitle } from "@/components/ui/card";
 import { Box, CircleHelp, Heart, HelpCircle, HelpCircleIcon, HelpingHand, Package, PackageOpen, PackageX, Settings, ShoppingCart, UserCircle } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { use, useEffect } from "react";
 
 export default function Account() {
 
-    const userName = "John"; // Simulate user name
-    const userSurname = "Doe"; // Simulate user surname
-    // Simulate user authentication status
-    const isLoggedIn = false; // Change this to false to simulate a logged-out state
-    // In a real application, you would check the user's authentication status here
-    // For example, you might check a cookie or a session variable
-    // const isLoggedIn = checkUserAuthentication();
-
+    const userName = "John";
+    const userSurname = "Doe";
+    const router = useRouter();
+   
     async function logOut() {
         try {
-            
-        } catch (error) {
             const res = await fetch("/api/auth/logout", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json", // Assurez-vous que le type de contenu est correct
-                },
-            });
+                method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+
+                const data = await res.json();
+
+                if(res.ok)
+                    router.push(data.redirectTo);
+                else
+                    alert(data.message || "Une erreur est survenue.");
+        } catch (error) {
+            console.error("Error during logout:", error);
         }
     }
     
