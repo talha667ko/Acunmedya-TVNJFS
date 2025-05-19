@@ -1,60 +1,9 @@
-"use client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod"
-import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form"
-import { Checkbox } from "@/components/ui/checkbox";
-import { useRouter } from "next/navigation";
-import { registerFormSchema, RegisterFormSchema } from "@/app/validations/auth/registerFormSchema";
 
+import RegisterForm from "@/app/_components/Auth/RegisterForm";
 
 export default function Register() {
-    const router = useRouter();
-    const form = useForm<RegisterFormSchema>({
-        resolver: zodResolver(registerFormSchema),
-        defaultValues: {
-            firstName: "",
-            lastName: "",
-            email: "",
-            password: "",
-            confirmPassword: "",
-            terms: false as any,
-        },
-    })
-
-    async function onSubmit(values: RegisterFormSchema) {
-        try {
-            const res = await fetch("/api/auth/register", {
-              method: "POST",
-              body: JSON.stringify(values),
-              headers: {
-                "Content-Type": "application/json",
-              },
-            });
-      
-            const data = await res.json();
-      
-            if (res.ok) {
-              router.push(data.redirectTo);
-            } else {
-              alert(data.message || "Une erreur est survenue.");
-            }
-          } catch (error) {
-            console.error("Erreur de connexion :", error);
-            alert("Échec de la connexion. Veuillez réessayer.");
-          }
-    }
     return (
         <Card className="flex flex-col justify-center items-center max-w-4xl w-full m-auto border-4 mt-12">
             <CardHeader className="max-w-xl w-full m-auto mb-6">
@@ -62,115 +11,7 @@ export default function Register() {
             <CardDescription className="">Inscrivez-vous pour profiter de nos services.</CardDescription>
             </CardHeader>
             <CardContent>
-            <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)}>
-                    <div className="grid grid-cols-2 gap-3 mb-6 w-full m-auto justify-center items-center">
-                        <div className="col-span-1">
-                            <FormField
-                                control={form.control}
-                                name="firstName"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>First Name</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="First Name" {...field} />
-                                        </FormControl>
-                                        <FormDescription>
-                                        </FormDescription>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
-                        <div className="col-span-1">
-                            <FormField
-                                control={form.control}
-                                name="lastName"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Last Name</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Last Name" {...field} />
-                                        </FormControl>
-                                        <FormDescription>
-                                        </FormDescription>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
-                        <div className="col-span-2">
-                            <FormField
-                                control={form.control}
-                                name="email"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Email</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="example@gmail.com" {...field} />
-                                        </FormControl>
-                                        <FormDescription>
-                                        </FormDescription>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
-                        <div className="col-span-2">
-                            <FormField
-                                control={form.control}
-                                name="password"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Mot de passe</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Mot de passe" {...field} />
-                                        </FormControl>
-                                        <FormDescription>
-                                        </FormDescription>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
-                        <div className="col-span-2">
-                            <FormField
-                                control={form.control}
-                                name="confirmPassword"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Confirmez mot de passe</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Confirmez le mot de passe" {...field} />
-                                        </FormControl>
-                                        <FormDescription>
-                                        </FormDescription>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
-                        <div className="col-span-2 flex flex-col">
-                            <FormField
-                            control={form.control}
-                            name="terms"
-                            render={({ field }) => (
-                                <FormItem className="flex items-center space-x-2">
-                                    <FormControl>
-                                        <Checkbox
-                                            checked={field.value}
-                                            onCheckedChange={field.onChange}
-                                        />
-                                    </FormControl>
-                                    <FormLabel className="text-sm">J'accepte les termes et conditions</FormLabel>
-                                </FormItem>
-                            )}
-                            />
-                    </div>
-                    </div>
-                    <Button type="submit" className="w-full">S'inscrire</Button>
-                </form>
-            </Form>
+            <RegisterForm />
             </CardContent>
             <CardFooter className="flex flex-col max-w-3xl mt-3">
             <p className="text-center">Vous avez déjà un compte ? <Link href={"/Auth/Log-in"} className="text-blue-500 hover:underline">Se connecter</Link></p>
