@@ -8,22 +8,20 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { loginFormSchema, LoginFormSchema } from "@/app/validations/auth/loginFormSchema";
 
-const formSchema = z.object({
-    email: z.string().email({ message: "Email invalide" }),
-    password: z.string().min(8, { message: "Le mot de passe doit contenir au moins 8 caractères" }).max(20, { message: "Le mot de passe ne doit pas dépasser 20 caractères" }),
-});
+
 export default function Login() {
     const router = useRouter();
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<LoginFormSchema>({
+        resolver: zodResolver(loginFormSchema),
         defaultValues: {
             email: "",
             password: "",
         },
     })
 
-    async function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: LoginFormSchema) {
         try {
             const res = await fetch("/api/auth/login", {
               method: "POST",

@@ -3,18 +3,23 @@ import { connectToDatabase } from "@/lib/db/mongodb";
 import { SignJWT} from "jose";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-
+import { loginFormSchema, LoginFormSchema } from "@/app/validations/auth/loginFormSchema";
 const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret";
 
 export async function POST(req:Request)
 {
     await connectToDatabase();
-    const {email,password} = await req.json();
+    const body = await req.json();
+    const result = loginFormSchema.safeParse(body);
 
-    if(!email || !password)
-       return new Response(JSON.stringify({message: "Missing required fields"}), {status: 400, headers: {"Content-Type": "application/json"}});
+    if(!result.success)
+      return NextResponse.json(
+        { message: "Invalid data", errors: result.error.flatten().fieldErrors },
+        { status: 400 }
+      );
+
+    const {email,password} = result.data;
     const user = await User.findOne({email})
-
     if(!user)
        return new Response(JSON.stringify({message: "Invalid credentials"}), {status: 400, headers: {"Content-Type": "application/json"}});
 
