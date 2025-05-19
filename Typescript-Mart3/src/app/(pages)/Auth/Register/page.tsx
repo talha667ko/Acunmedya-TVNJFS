@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
@@ -17,20 +16,13 @@ import {
 } from "@/components/ui/form"
 import { Checkbox } from "@/components/ui/checkbox";
 import { useRouter } from "next/navigation";
+import { registerFormSchema, RegisterFormSchema } from "@/app/validations/auth/registerFormSchema";
 
-const formSchema = z.object({
-    firstName: z.string().min(2, { message: "Le prénom est requis" }).max(20, { message: "Le prénom ne doit pas dépasser 20 caractères" }),
-    lastName: z.string().min(2, { message: "Le nom est requis" }).max(20, { message: "Le nom ne doit pas dépasser 20 caractères" }),
-    email: z.string().email({ message: "Email invalide" }),
-    password: z.string().min(8, { message: "Le mot de passe doit contenir au moins 8 caractères" }).max(20, { message: "Le mot de passe ne doit pas dépasser 20 caractères" }),
-    confirmPassword: z.string().min(8, { message: "Le mot de passe doit contenir au moins 8 caractères" }).max(20, { message: "Le mot de passe ne doit pas dépasser 20 caractères" }),
-    terms: z.literal(true),
-});
 
 export default function Register() {
     const router = useRouter();
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<RegisterFormSchema>({
+        resolver: zodResolver(registerFormSchema),
         defaultValues: {
             firstName: "",
             lastName: "",
@@ -41,7 +33,7 @@ export default function Register() {
         },
     })
 
-    async function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: RegisterFormSchema) {
         try {
             const res = await fetch("/api/auth/register", {
               method: "POST",
