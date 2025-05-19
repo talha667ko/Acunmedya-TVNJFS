@@ -14,7 +14,8 @@ export async function GET() {
     return NextResponse.json({
       authenticated: true,
       user: {
-        name: payload.name,
+        firstName: payload.firstName,
+        lastName: payload.lastName,
         email: payload.email
       }
     });

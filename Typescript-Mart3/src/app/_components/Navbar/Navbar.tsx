@@ -8,14 +8,35 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Menu, X, User } from "lucide-react";
+import { Menu, X, User, Loader2 } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
 import SearchBar from "../SearchBar";
+import { getUserNameAsync } from "@/lib/jwtClient";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  const [userName, setUserName] = useState<string | null>(null);
+  const pathname = usePathname();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  useEffect(() => {
+    const fetchUserName = async () => {
+      try {
+        const name = await getUserNameAsync();
+        setIsLoading(true);
+        setUserName(name);
+      } catch (error) {
+      console.error("Kullanıcı adı alınırken hata:", error);
+      setUserName(null);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+    fetchUserName();
+  }, [pathname]);
 
   const toggleMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -67,7 +88,7 @@ export default function Navbar() {
         <div className="flex">
           {isLoggedIn ? (
             <Link href={"/Account"}>
-              <Button className="cursor-pointer"><User/></Button>
+              <Button className="cursor-pointer">{isLoading ? <Loader2 className="animate-spin" /> : userName ? <p>{userName}</p> : <User/>}</Button>
             </Link>
           ) : (
             <Link href={"/Auth/Log-in"}>
