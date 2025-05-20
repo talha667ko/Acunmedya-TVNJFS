@@ -18,6 +18,8 @@ if (!GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET || !JWT_SECRET || !APP_URL) {
 async function googleCallbackHandler(req: NextRequest) {
     const searchParams = req.nextUrl.searchParams;
     const code = searchParams.get("code");
+    const state = searchParams.get("state");
+    const isSignUp = state ? JSON.parse(state).isSignUp : false;
 
     if (!code) {
         throw new AuthenticationError("No authorization code provided");
@@ -31,8 +33,8 @@ async function googleCallbackHandler(req: NextRequest) {
         },
         body: new URLSearchParams({
             code,
-            client_id: GOOGLE_CLIENT_ID,
-            client_secret: GOOGLE_CLIENT_SECRET,
+            client_id: GOOGLE_CLIENT_ID!,
+            client_secret: GOOGLE_CLIENT_SECRET!,
             redirect_uri: `${APP_URL}/api/auth/google/callback`,
             grant_type: "authorization_code",
         }),
@@ -63,6 +65,9 @@ async function googleCallbackHandler(req: NextRequest) {
     let user = await User.findOne({ email: userData.email });
 
     if (!user) {
+        if (!isSignUp) {
+            throw new AuthenticationError("Compte non trouvé. Veuillez vous inscrire d'abord.");
+        }
         // Créer un nouvel utilisateur
         user = await User.create({
             email: userData.email,
@@ -70,6 +75,8 @@ async function googleCallbackHandler(req: NextRequest) {
             lastName: userData.family_name,
             password: Math.random().toString(36).slice(-8), // Mot de passe aléatoire
         });
+    } else if (isSignUp) {
+        throw new AuthenticationError("Un compte existe déjà avec cet email. Veuillez vous connecter.");
     }
 
     // Créer le token JWT
