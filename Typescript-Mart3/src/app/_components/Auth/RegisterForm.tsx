@@ -198,13 +198,13 @@ export default function RegisterForm() {
                                                 className={`text-sm flex items-center gap-2 ${
                                                     rule.validate(password)
                                                         ? "text-green-500"
-                                                        : "text-red-500"
+                                                        : "text-black"
                                                 }`}
                                             >
                                                 <div className={`w-2 h-2 rounded-full ${
                                                     rule.validate(password)
                                                         ? "bg-green-500"
-                                                        : "bg-red-500"
+                                                        : "bg-black"
                                                 }`} />
                                                {rule.text}
                                             </div>

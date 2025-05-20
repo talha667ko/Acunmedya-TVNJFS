@@ -37,11 +37,6 @@ export interface JwtPayload {
     }
   };
   
-  export const getUserNameClient = (): string | null => {
-    const payload = getJwtPayloadClient();
-    return payload?.firstName || null;
-  };
-  
   // Client tarafında kullanıcı bilgilerini getiren fonksiyon
   export const getUserData = async (): Promise<UserData> => {
     try {
@@ -71,3 +66,8 @@ export interface JwtPayload {
     const data = await getUserData();
     return data.authenticated ? data.user?.firstName || null : null;
   }; 
+
+  export const getUserLastNameAsync = async (): Promise<string | null> => {
+    const data = await getUserData();
+    return data.authenticated ? data.user?.lastName || null : null;
+  };
