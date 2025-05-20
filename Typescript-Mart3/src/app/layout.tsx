@@ -6,7 +6,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./_components/Navbar/Navbar";
 import Footer from "./_components/Footer";
-
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "FC Shop",
@@ -22,6 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Navbar />
+        <Toaster position="bottom-right" richColors/>
         {children}
         <Footer/>
       </body>
